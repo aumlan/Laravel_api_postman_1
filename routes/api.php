@@ -23,3 +23,5 @@ Route::get('/country', [Country\countryController::class, 'country']);
 Route::get('/country/{id}', [Country\countryController::class, 'countryByID']);
 
 Route::post('/country', [Country\countryController::class, 'countrySave']);
+
+Route::put('/country/{country}', [Country\countryController::class, 'countryUpdate']);
