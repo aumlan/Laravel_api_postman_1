@@ -12,27 +12,46 @@ class countryController extends Controller
     {
         return response()->json(countryModel::get(), 200);
     }
+
+    // Restful api 404 -> NOT Found
     public function countryByID($id)
     {
-        return response()->json(countryModel::find($id), 200);
+        $country = countryModel::find($id);
+        if (is_null($country)) {
+            return response()->json('Record Not found', 404);
+        } else {
+            return response()->json($country, 200);
+        }
     }
-    // Restful api 201 -> Created
+
+    //Restful api 201 -> Created
     public function countrySave(Request $request)
     {
         $country = countryModel::create($request->all());
         return response()->json($country, 201);
     }
+
     // Restful api 200 -> OK
-    public function countryUpdate(Request $request, CountryModel $country)
+    public function countryUpdate(Request $request, $id)
     {
-        $country->update($request->all());
-        return response()->json($country, 200);
+        $country = countryModel::find($id);
+        if (is_null($country)) {
+            return response()->json('Record Not found', 404);
+        } else {
+            $country->update($request->all());
+            return response()->json($country, 200);
+        }
     }
 
     // Restful api 204 -> Return No Content
-    public function countryDelete(Request $request, CountryModel $country)
+    public function countryDelete(Request $request, $id)
     {
-        $country->delete();
-        return response()->json(null, 204);
+        $country = countryModel::find($id);
+        if (is_null($country)) {
+            return response()->json('Record Not found', 404);
+        } else {
+            $country->delete();
+            return response()->json(null, 204);
+        }
     }
 }
