@@ -20,3 +20,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/country', [Country\countryController::class, 'country']);
+Route::get('/country/{id}', [Country\countryController::class, 'countryByID']);
+
+Route::post('/country', [Country\countryController::class, 'countrySave']);
