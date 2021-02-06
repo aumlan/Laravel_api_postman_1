@@ -17,3 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 //Route::get('country', 'Country\countryController@country');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
