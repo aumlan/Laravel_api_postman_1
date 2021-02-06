@@ -11,11 +11,13 @@ use Illuminate\Support\Facades\DB;
 
 class countryController extends Controller
 {
+    /*
+    //*TODO NOT NEEDED in Controller Resource method  
+
     public function country()
     {
         return response()->json(countryModel::get(), 200);
     }
-
     // Restful api 404 -> NOT Found
     public function countryByID($id)
     {
@@ -26,7 +28,6 @@ class countryController extends Controller
             return response()->json($country, 200);
         }
     }
-
     //Restful api 201 -> Created
     public function countrySave(Request $request)
     {
@@ -49,8 +50,6 @@ class countryController extends Controller
             }
         }
     }
-
-
     // Restful api 200 -> OK
     public function countryUpdate(Request $request, $id)
     {
@@ -62,7 +61,6 @@ class countryController extends Controller
             return response()->json($country, 200);
         }
     }
-
     // Restful api 204 -> Return No Content
     public function countryDelete(Request $request, $id)
     {
@@ -73,5 +71,5 @@ class countryController extends Controller
             $country->delete();
             return response()->json(null, 204);
         }
-    }
+    }*/
 }
