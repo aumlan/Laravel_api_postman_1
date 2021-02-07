@@ -29,4 +29,11 @@ Route::put('/country/{id}', [Country\countryController::class, 'countryUpdate'])
 Route::delete('/country/{id}', [Country\countryController::class, 'countryDelete']);*/
 
 //Resource Controller Route
+//Token Authentication
+//Basic Authentication
 Route::apiResource('/country', Country\countryControllerResource::class);
+
+//Passport route
+/*Route::group(['middleware' => ['auth:api']], function () {
+    Route::apiResource('/country', Country\countryControllerResource::class);
+});*/

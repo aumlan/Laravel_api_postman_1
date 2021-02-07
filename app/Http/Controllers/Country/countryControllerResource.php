@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\countryModel;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use illuminate\Support\Facades\Auth;
 
 class countryControllerResource extends Controller
 {
@@ -44,9 +45,11 @@ class countryControllerResource extends Controller
             'iso' => 'required|min:2|max:2'
         ];
         $validator = Validator::make($request->all(), $rules);
+
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
         } else {
+
             try {
                 $country = countryModel::create($request->all());
                 return response()->json($country, 201);
