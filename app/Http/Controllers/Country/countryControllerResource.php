@@ -49,9 +49,12 @@ class countryControllerResource extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
         } else {
-
             try {
+
+
                 $country = countryModel::create($request->all());
+                $responseArray = [];
+                $responseArray['token'] = $country->createToken('MyToken')->accessToken;
                 return response()->json($country, 201);
             } catch (\Illuminate\Database\QueryException $e) {
                 $errorCode = $e->errorInfo[1];
@@ -123,6 +126,23 @@ class countryControllerResource extends Controller
         } else {
             $country->delete();
             return response()->json(null, 204);
+        }
+    }
+
+    public function register(Request $request)
+    {
+        //same as Registration/Store process
+        //first validate data and then create and return response
+    }
+    public function login(Request $request)
+    {
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            $user = Auth::user();
+            $responseArray = [];
+            $responseArray['token'] = $user->createToken('MyToken')->accessToken;
+            return response()->json($responseArray, 200);
+        } else {
+            return response()->json(['error' => 'Unauthenticated'], 203);
         }
     }
 }

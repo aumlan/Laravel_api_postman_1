@@ -31,9 +31,14 @@ Route::delete('/country/{id}', [Country\countryController::class, 'countryDelete
 //Resource Controller Route
 //Token Authentication
 //Basic Authentication
-Route::apiResource('/country', Country\countryControllerResource::class);
+//Route::apiResource('/country', Country\countryControllerResource::class);
 
 //Passport route
 /*Route::group(['middleware' => ['auth:api']], function () {
     Route::apiResource('/country', Country\countryControllerResource::class);
 });*/
+
+Route::post('/register', [Country\countryControllerResource::class, 'register']);
+Route::post('/login', [Country\countryControllerResource::class, 'login'])->name('login ');
+
+Route::middleware('auth:api')->get('/country', [Country\countryControllerResource::class, 'index']);
